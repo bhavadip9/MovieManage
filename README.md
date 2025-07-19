@@ -28,7 +28,7 @@ Visual Studio or VS Code
 
 1. Clone the Repo
 
-git clone https://github.com/yourusername/MovieManage.git
+git clone https://github.com/bhavadip9/MovieManage.git
 cd MovieManage
 
 2. Database Setup
@@ -38,7 +38,7 @@ Create a database named UserMovieDB in SQL Server.
 Update your connection string in appsettings.json:
 
 "ConnectionStrings": {
-  "UserMovieDB": "Server=YOUR_SERVER_NAME;Database=UserMovieDB;Trusted_Connection=True;TrustServerCertificate=True;"
+  "UserMovieDB": "Server=DESKTOP-F1KOQJT\\SQLEXPRESS;Database=UserMovieDB; TrustServerCertificate=True;"
 }
 
 3. Run Migrations (Optional if DB already exists)
@@ -49,7 +49,7 @@ dotnet ef database update
 
 dotnet run
 
-Navigate to https://localhost:5001 or http://localhost:5000.
+Navigate to https://localhost:5018 .
 
 🤛 Assumptions
 
