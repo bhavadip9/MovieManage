@@ -1,0 +1,41 @@
+CREATE PROCEDURE EditUser
+    @UserId INT,
+    @FullName NVARCHAR(100),
+    @Email NVARCHAR(100),
+    @Mobile NVARCHAR(20),
+    @Password NVARCHAR(100)
+AS
+BEGIN
+    UPDATE Users
+    SET FullName = @FullName,
+        Email = @Email,
+        Mobile = @Mobile,
+        Password = @Password
+    WHERE UserId = @UserId
+END
+
+
+CREATE PROCEDURE AddUser
+    @FullName NVARCHAR(100),
+    @Email NVARCHAR(100),
+    @Mobile NVARCHAR(20),
+    @Password NVARCHAR(100)
+AS
+BEGIN
+    INSERT INTO Users (FullName, Email, Mobile, Password)
+    VALUES (@FullName, @Email, @Mobile, @Password)
+END
+
+CREATE PROCEDURE DeleteUser
+    @UserId INT
+AS
+BEGIN
+    DELETE FROM Users WHERE UserId = @UserId
+END
+
+CREATE PROCEDURE GetAllUsers
+AS
+BEGIN
+    SELECT * FROM Users
+END
+

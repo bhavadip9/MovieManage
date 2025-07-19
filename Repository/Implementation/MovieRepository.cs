@@ -1,11 +1,14 @@
-﻿using MovieManage.Models;
+﻿
+
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using MovieManage.Models;
 using MovieManage.Repository.Interfaces;
 
 namespace MovieManage.Repository.Implementation
 {
     public class MovieRepository : IMovieRepostory
     {
-
         private readonly UserMovieDbContext _context;
 
         public MovieRepository(UserMovieDbContext context)
@@ -15,44 +18,54 @@ namespace MovieManage.Repository.Implementation
 
         public void Add(Movie movie)
         {
-            if (movie == null)
+            var parameters = new[]
             {
-                throw new ArgumentNullException(nameof(movie));
-            }
-            _context.Movies.Add(movie);
-            _context.SaveChanges();
+                new SqlParameter("@Title", movie.Title),
+                new SqlParameter("@Detail", movie.Detail),
+                new SqlParameter("@ReleaseDate", movie.ReleaseDate)
+            };
+
+            _context.Database.ExecuteSqlRaw("EXEC AddMovie @Title, @Detail, @ReleaseDate", parameters);
         }
 
         public List<Movie> GetAllMovies()
         {
-            return _context.Movies.ToList();
+            return _context.Movies
+                .FromSqlRaw("EXEC GetAllMovies")
+                .ToList();
         }
 
         public Movie GetMovieById(int id)
         {
-            return _context.Movies.FirstOrDefault(m => m.MovieId == id);
+            var param = new SqlParameter("@MovieId", id);
+            return _context.Movies
+                .FromSqlRaw("EXEC GetMovieById @MovieId", param)
+                .AsEnumerable()
+                .FirstOrDefault();
         }
 
         public void UpdateMovie(Movie movie)
         {
-            if (movie == null)
+            var parameters = new[]
             {
-                throw new ArgumentNullException(nameof(movie));
-            }
-            _context.Movies.Update(movie);
-            _context.SaveChanges();
+                new SqlParameter("@MovieId", movie.MovieId),
+                new SqlParameter("@Title", movie.Title),
+                new SqlParameter("@Detail", movie.Detail),
+                new SqlParameter("@ReleaseDate", movie.ReleaseDate)
+            };
+
+            _context.Database.ExecuteSqlRaw("EXEC UpdateMovie @MovieId, @Title, @Detail, @ReleaseDate", parameters);
         }
 
         public bool DeleteMovie(int id)
         {
-            var movie = _context.Movies.FirstOrDefault(m => m.MovieId == id);
+            var param = new SqlParameter("@MovieId", id);
+
+            var movie = GetMovieById(id);
             if (movie == null)
-            {
                 return false;
-                throw new ArgumentException("Movie not found", nameof(id));
-            }
-            _context.Movies.Remove(movie);
-            _context.SaveChanges();
+
+            _context.Database.ExecuteSqlRaw("EXEC DeleteMovie @MovieId", param);
             return true;
         }
     }

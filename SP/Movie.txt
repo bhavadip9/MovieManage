@@ -1,0 +1,47 @@
+CREATE PROCEDURE AddMovie
+    @Title NVARCHAR(150),
+    @Detail NVARCHAR(100),
+    @ReleaseDate DATE
+AS
+BEGIN
+    INSERT INTO Movies (Title, Detail, ReleaseDate)
+    VALUES (@Title, @Detail, @ReleaseDate)
+END
+
+
+CREATE PROCEDURE UpdateMovie
+    @MovieId INT,
+    @Title NVARCHAR(150),
+    @Detail NVARCHAR(100),
+    @ReleaseDate DATE
+AS
+BEGIN
+    UPDATE Movies
+    SET Title = @Title,
+        Detail = @Detail,
+        ReleaseDate = @ReleaseDate
+    WHERE MovieId = @MovieId
+END
+
+
+CREATE PROCEDURE DeleteMovie
+    @MovieId INT
+AS
+BEGIN
+    DELETE FROM Movies WHERE MovieId = @MovieId
+END
+
+CREATE PROCEDURE GetAllMovies
+AS
+BEGIN
+    SELECT * FROM Movies
+END
+
+
+CREATE PROCEDURE GetMovieById
+    @MovieId INT
+AS
+BEGIN
+    SELECT * FROM Movies WHERE MovieId = @MovieId
+END
+

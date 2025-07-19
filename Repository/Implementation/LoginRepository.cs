@@ -1,4 +1,6 @@
-﻿using MovieManage.Models;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using MovieManage.Models;
 using MovieManage.Repository.Interfaces;
 
 namespace MovieManage.Repository.Implementation
@@ -38,19 +40,19 @@ namespace MovieManage.Repository.Implementation
             }
         }
 
+       
         public User AddUser(User user)
         {
-            try
-            {
-                _context.Users.Add(user);
-                _context.SaveChanges();
-                return user;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Exception: {ex.Message}\n{ex.InnerException?.Message}");
-                return new User();
-            }
+            var fullNameParam = new SqlParameter("@FullName", user.FullName);
+            var emailParam = new SqlParameter("@Email", user.Email);
+            var mobileParam = new SqlParameter("@Mobile", user.Mobile);
+            var passwordParam = new SqlParameter("@Password", user.Password);
+
+            _context.Database.ExecuteSqlRaw(
+                "EXEC AddUser @FullName, @Email, @Mobile, @Password",
+                fullNameParam, emailParam, mobileParam, passwordParam
+            );
+            return user;
         }
     }
 }
