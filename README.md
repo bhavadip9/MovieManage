@@ -20,11 +20,11 @@ Middleware/ – Custom filters for authentication.
 
 Prerequisites
 
-.NET 6 SDK
+.NET 9 SDK
 
 SQL Server (LocalDB or SQL Server Express)
 
-Visual Studio or VS Code
+Visual Studio
 
 1. Clone the Repo
 
@@ -47,7 +47,7 @@ dotnet ef database update
 
 4. Run the Project
 
-dotnet run
+dotnet watch
 
 Navigate to https://localhost:5018 .
 
