@@ -75,6 +75,10 @@ JWT is created upon successful login and stored in cookies.
 
 ![Login Screenshot](wwwroot/screenshots/login.png)
 
+### 1. Login Page
+
+![Login Screenshot](wwwroot/screenshots/Register.png)
+
 ### 2. Movie List Page
 
 ![Movie List Screenshot](wwwroot/screenshots/movielist.png)
