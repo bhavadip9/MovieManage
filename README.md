@@ -81,7 +81,7 @@ JWT is created upon successful login and stored in cookies.
 
 ### 3. Add Movie Form
 
-![Add Movie Screenshot](wwwroot/screenshots/create.png)
+![Add Movie Screenshot](wwwroot/screenshots/AddMovies.png)
 
 
 
