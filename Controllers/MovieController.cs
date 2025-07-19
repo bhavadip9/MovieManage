@@ -44,7 +44,7 @@ namespace MovieManage.Controllers
             return View(movie);
         }
 
-        // Handle edit form POST
+        
         [HttpPost]
         public IActionResult Edit(MovieViewModel model)
         {
