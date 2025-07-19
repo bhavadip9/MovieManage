@@ -1,0 +1,30 @@
+﻿@model MovieManage.ViewModel.MovieViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Movie Details</h4>
+        </div>
+        <div class="card-body">
+            <dl class="row mb-4">
+                <dt class="col-sm-3">Title</dt>
+                <dd class="col-sm-9">@Model.Title</dd>
+
+                <dt class="col-sm-3">Detail</dt>
+                <dd class="col-sm-9">@Model.Detail</dd>
+
+                <dt class="col-sm-3">Release Date</dt>
+                <dd class="col-sm-9">@Model.ReleaseDate.ToString("yyyy-MM-dd")</dd>
+            </dl>
+
+            <div class="d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                <a asp-action="Edit" asp-route-id="@Model.MovieId" class="btn btn-primary">Edit</a>
+            </div>
+        </div>
+    </div>
+</div>
